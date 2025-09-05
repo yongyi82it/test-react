@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TOC from './components/TOC';
 import Content from './components/Content';
 import Subject from './components/Subject';
+import Control from './components/Control';
 import './style.css';
 
 /*
@@ -59,7 +60,9 @@ class App extends Component {
             this.setState({mode:'welcome'})
           }.bind(this)}>  
         </Subject>
-        
+        <Control onChangMode={function(_mode){
+          this.setState({mode:_mode});
+        }.bind(this)}></Control>
         <TOC 
           onChangPage={function(id){
             this.setState({
