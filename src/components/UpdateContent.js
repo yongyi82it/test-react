@@ -28,9 +28,9 @@ class UpdateContent extends Component {
               this.state.title,
               this.state.desc
             );
-            alert('update');
+           // alert('update');
           }.bind(this)}>
-            <input type='hidden' name='id' value='{this.state.id}'></input>
+            <input type='hidden' name='id' value={this.state.id}></input>
             <p>                                                    
               <input 
                 type='text' 

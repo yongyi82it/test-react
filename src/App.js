@@ -23,7 +23,7 @@ class App extends Component {
     super(props);
     this.max_content_id = 3;
     this.state = {
-      mode:'create',
+      mode:'wdlcome',
       selected_content_id:2,
       subject:{title:'WEB', sub:'world wide web!!!!!!'},
       welcome:{title:'Welcome',desc:'Hello,React!!!'},
@@ -40,6 +40,7 @@ class App extends Component {
         var data=this.state.contents[i];
         if(data.id === this.state.selected_content_id){
           
+
           return data;
           break;
         }
@@ -77,12 +78,12 @@ class App extends Component {
         function(_id, _title, _desc){  
           var _contents = Array.from(this.state.contents);
           var i = 0;
-          debugger;
           while(i < _contents.length){
             if(_contents[i].id === _id){
               _contents[i] = {id:_id, title:_title, desc:_desc};
               break;
             }
+            i = i + 1;
           }
 
           this.setState({
@@ -107,7 +108,7 @@ class App extends Component {
           }.bind(this)}>  
         </Subject>
         <Control onChangMode={function(_mode){
-          this.setState({mode:_mode});
+          this.setState({mode:_mode}); 
         }.bind(this)}></Control>
         <TOC 
           onChangPage={function(id){
@@ -118,6 +119,31 @@ class App extends Component {
           }.bind(this)} 
           data={this.state.contents}
         ></TOC>
+        <Control onChangMode={function(_mode){
+          if(_mode === 'delete'){
+            if(window.confirm('really?')){
+              var _contents = Array.from(this.state.contents);
+              var i = 0;
+              while(i < _contents.length){
+               if(_contents[i].id === this.state.selected_content_id){
+                  _contents.splice(i,1);
+                  break;
+               }
+               i = i + 1;
+              }
+              this.setState({
+                mode:'welcome',
+                contents:_contents
+              });
+              alert('deleted!')
+            }
+          }else{
+            this.setState({
+            mode:_mode
+          });
+          }
+          
+        }.bind(this)}></Control>
         
         {this.getContent()}
       </div>
